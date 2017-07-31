@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="336.0" prefWidth="539.0" stylesheets="@../../../Font-Type.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="List.view.FontDlgController">
+   <children>
+      <ButtonBar layoutX="124.0" layoutY="146.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <buttons>
+          <Button fx:id="handleOk" mnemonicParsing="false" onAction="#btnOk" text="Ok" />
+            <Button fx:id="handleCancel" mnemonicParsing="false" onAction="#btnCancel" text="Cancel" />
+        </buttons>
+      </ButtonBar>
+      <Label layoutX="81.0" layoutY="14.0" prefHeight="50.0" prefWidth="188.0" text="Font Size Control">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="33.0" layoutY="100.0" prefHeight="40.0" prefWidth="75.0" text="Size">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fontSizeField" layoutX="144.0" layoutY="100.0" prefHeight="40.0" prefWidth="161.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="checkLbl" layoutX="14.0" layoutY="14.0" />
+   </children>
+</AnchorPane>

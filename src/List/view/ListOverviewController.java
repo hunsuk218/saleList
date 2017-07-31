@@ -1,8 +1,12 @@
 package List.view;
 
 import javafx.fxml.FXML;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import List.MainApp;
-import List.model.Sale;
+import List.model.SaleItem;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -11,13 +15,13 @@ import javafx.scene.control.TableView;
 
 public class ListOverviewController {
 	@FXML
-	private TableView<Sale> saleTable;
+	private TableView<SaleItem> saleTable;
 	@FXML
-	private TableColumn<Sale, String> complexColumn;
+	private TableColumn<SaleItem, String> complexColumn;
 	@FXML
-	private TableColumn<Sale, String> dongColumn;
+	private TableColumn<SaleItem, String> dongColumn;
 	@FXML
-	private TableColumn<Sale, String> hoColumn;
+	private TableColumn<SaleItem, String> hoColumn;
 	
 	@FXML
 	private Label complexLabel;
@@ -28,9 +32,13 @@ public class ListOverviewController {
 	@FXML
 	private Label priceLabel;
 	@FXML
-	private Label phoneLabel;
+	private Label phoneMaleLabel;
 	@FXML
-	private Label phone2Label;
+	private Label phoneFemaleLabel;
+	@FXML
+	private Label phone2MaleLabel;
+	@FXML
+	private Label phone2FemaleLabel;
 	@FXML
 	private Label rmksLabel;
 	
@@ -41,8 +49,10 @@ public class ListOverviewController {
 	
 	@FXML
 	private void handleDeleteSale() {
-	    int selectedIndex = saleTable.getSelectionModel().getSelectedIndex();
-	    saleTable.getItems().remove(selectedIndex);
+	    SaleItem selectedSale = saleTable.getSelectionModel().getSelectedItem();
+	    String key = selectedSale.getKey();
+	    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("/sale-list/" + key);
+		ref.removeValue();
 	}
 	
 	@FXML
@@ -66,15 +76,11 @@ public class ListOverviewController {
 	
 	@FXML
 	private void handleNewSale() {
-	    Sale tempSale = new Sale();
-	    boolean okClicked = mainApp.showSaleEditDialog(tempSale);
-	    if (okClicked) {
-	        mainApp.getSaleData().add(tempSale);
-	    }
+	   mainApp.showSaleNewDialog();
 	}
 	@FXML
 	private void handleEditSale() {
-	    Sale selectedSale = saleTable.getSelectionModel().getSelectedItem();
+	    SaleItem selectedSale = saleTable.getSelectionModel().getSelectedItem();
 	    if (selectedSale != null) {
 	        boolean okClicked = mainApp.showSaleEditDialog(selectedSale);
 	        if (okClicked) {
@@ -82,7 +88,7 @@ public class ListOverviewController {
 	        }
 
 	    } else {
-	        // ¾Æ¹«°Íµµ ¼±ÅÃÇÏÁö ¾Ê¾Ò´Ù.
+	        // ï¿½Æ¹ï¿½ï¿½Íµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´ï¿½.
 	        Alert alert = new Alert(AlertType.WARNING);
 	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("No Selection");
@@ -93,22 +99,26 @@ public class ListOverviewController {
 	    }
 	}
 	
-	private void showSaleDetails(Sale sale){
+	private void showSaleDetails(SaleItem sale){
 		if(sale != null){
 			complexLabel.setText(sale.getcomplex());
 			priceLabel.setText(sale.getPrice());
 			dongLabel.setText(sale.getDong());
 			hoLabel.setText(sale.getHo());
-			phoneLabel.setText(sale.getPhone());;
-			phone2Label.setText(sale.getPhone2());;
+			phoneMaleLabel.setText(sale.getPhoneMale());;
+			phoneFemaleLabel.setText(sale.getPhoneFemale());;
+			phone2MaleLabel.setText(sale.getPhone2Male());;
+			phone2FemaleLabel.setText(sale.getPhone2Female());;
 			rmksLabel.setText(sale.getRmks());;
 		}else{
 			complexLabel.setText("");
 			priceLabel.setText("");
 			dongLabel.setText("");
 			hoLabel.setText("");
-			phoneLabel.setText("");
-			phone2Label.setText("");
+			phoneMaleLabel.setText("");
+			phoneFemaleLabel.setText("");
+			phone2MaleLabel.setText("");
+			phone2FemaleLabel.setText("");
 			rmksLabel.setText("");
 		}
 	}
