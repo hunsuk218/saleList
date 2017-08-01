@@ -122,6 +122,7 @@ public class SaleEditDialogController {
 			ComplexField.setEditable(true);
 			isETC = true;
 		} else {
+			isETC = false;
 			ComplexField.setEditable(false);
 		}
 	}
