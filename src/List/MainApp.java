@@ -75,7 +75,17 @@ public class MainApp extends Application {
 			}
 
 			@Override
-			public void onChildRemoved(DataSnapshot dataSnapshot) {}
+			public void onChildRemoved(DataSnapshot dataSnapshot) {
+				String key = dataSnapshot.getKey();
+				synchronized(SaleData) {
+					for(Iterator<SaleItem> it = SaleData.iterator(); it.hasNext();) {
+						String value = it.next().getKey();
+						if(value.equals(key)) {
+							it.remove();
+						}
+					}
+				}
+			}
 
 			@Override
 			public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
@@ -101,7 +111,7 @@ public class MainApp extends Application {
 	public void initRootLayout(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/RootLayout.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			
 			RootOverviewController controller = loader.getController();
@@ -117,7 +127,7 @@ public class MainApp extends Application {
 	public void showListOverview(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/ListOverview.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/ListOverview.fxml"));
 			AnchorPane ListOverview = (AnchorPane)loader.load();
 
 			rootLayout.setCenter(ListOverview);
@@ -131,7 +141,7 @@ public class MainApp extends Application {
 	public boolean showSaleEditDialog(SaleItem sale){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/SaleEditDialog.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/SaleEditDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -155,7 +165,7 @@ public class MainApp extends Application {
 	public void showSaleNewDialog(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/SaleEditDialog.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/SaleEditDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -176,7 +186,7 @@ public class MainApp extends Application {
 	public void showFontDlg() {
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/FontDlg.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/FontControllDlg.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
