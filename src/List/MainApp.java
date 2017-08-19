@@ -32,6 +32,8 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private ObservableList<SaleItem> SaleData = FXCollections.observableArrayList();
+	private ChildEventListener mChildEventListener;
+	DatabaseReference ref;
 
 
 	public MainApp(){
@@ -46,10 +48,11 @@ public class MainApp extends Application {
 			System.out.println(e);
 		}
 
-		DatabaseReference ref = FirebaseDatabase
+		ref = FirebaseDatabase
 				.getInstance()
 				.getReference("sale-list");
-		ref.addChildEventListener(new ChildEventListener() {
+		
+		mChildEventListener = new ChildEventListener(){
 			@Override
 			public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
 				SaleItem saleItem = dataSnapshot.getValue(SaleItem.class);
@@ -91,7 +94,12 @@ public class MainApp extends Application {
 
 			@Override
 			public void onCancelled(DatabaseError databaseError) {}
+<<<<<<< HEAD
 		});
+=======
+		};
+		ref.addChildEventListener(mChildEventListener);
+>>>>>>> 2415384b55bb66e1ef8ce2dfe0b71beca3097837
 	}
 
 	public ObservableList<SaleItem> getSaleData(){
@@ -109,7 +117,11 @@ public class MainApp extends Application {
 	public void initRootLayout(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
+<<<<<<< HEAD
 			loader.setLocation(getClass().getResource("/src/List/view/RootLayout.fxml"));
+=======
+			loader.setLocation(MainApp.class.getResource("/src/List/view/RootLayout.fxml"));
+>>>>>>> 2415384b55bb66e1ef8ce2dfe0b71beca3097837
 			rootLayout = (BorderPane) loader.load();
 			
 			Scene scene = new Scene(rootLayout);
@@ -185,7 +197,11 @@ public class MainApp extends Application {
 	public void showFontDlg() {
 		try{
 			FXMLLoader loader = new FXMLLoader();
+<<<<<<< HEAD
 			loader.setLocation(MainApp.class.getResource("/src/List/view/FontDlg.fxml"));
+=======
+			loader.setLocation(MainApp.class.getResource("/src/List/view/FontControllDlg.fxml"));
+>>>>>>> 2415384b55bb66e1ef8ce2dfe0b71beca3097837
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -209,5 +225,13 @@ public class MainApp extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+    @Override
+    public void stop() throws Exception {
+    	ref.removeEventListener(mChildEventListener);
+    	System.exit(0);
+    	System.out.println("Exit");
+    	
+    }
 
 }

@@ -92,8 +92,8 @@ public class ListOverviewController {
 	        Alert alert = new Alert(AlertType.WARNING);
 	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("No Selection");
-	        alert.setHeaderText("No Person Selected");
-	        alert.setContentText("Please select a person in the table.");
+	        alert.setHeaderText("No Selected");
+	        alert.setContentText("Please select a sale in the table.");
 
 	        alert.showAndWait();
 	    }

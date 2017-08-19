@@ -4,16 +4,17 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
+<<<<<<< HEAD
 <BorderPane prefHeight="800.0" prefWidth="1000.0"  xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="List.view.RootOverviewController">
+=======
+<BorderPane prefHeight="800.0" prefWidth="1000.0" stylesheets="Font-Type.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="List.view.RootOverviewController">
+>>>>>>> 2415384b55bb66e1ef8ce2dfe0b71beca3097837
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button mnemonicParsing="false" onAction="#handleFontControllBtn" text="Font" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
         </items>
       </ToolBar>
    </top>
 </BorderPane>
+mm

@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -18,15 +17,13 @@ public class FontDlgController {
 	private Button btnOk;
 	@FXML
 	private Button btnCancel;
-	@FXML
-	private Label checkLbl;
 	
 	private Stage dialogStage;
 	
 	
 	@FXML
 	private void initialize(){
-		fontSizeField.setText(Double.toString(fontSizeField.getFont().getSize()));
+		fontSizeField.setText("15.0");
 	}
 	
 	public void setDialogStage(Stage dialogStage) {
@@ -35,7 +32,7 @@ public class FontDlgController {
 	
 	public void btnOk() throws IOException {
 		try {
-		BufferedWriter out2 = new BufferedWriter(new FileWriter("target\\Font-Type.CSS"));
+		BufferedWriter out2 = new BufferedWriter(new FileWriter("Font-Type.CSS"));
 		
 		String txt = ".label {\r\n" + 
 				"    -fx-font-size: "+ fontSizeField.getText() +"pt;\r\n" + 
