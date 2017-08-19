@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="336.0" prefWidth="539.0" stylesheets="@../../../Font-Type.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="List.view.FontDlgController">
+<AnchorPane prefHeight="336.0" prefWidth="539.0"  xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="List.view.FontDlgController">
    <children>
       <ButtonBar layoutX="124.0" layoutY="146.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
         <buttons>

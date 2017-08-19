@@ -35,7 +35,6 @@ public class MainApp extends Application {
 
 
 	public MainApp(){
-
 		try{
 			// Initialize the app with a service account, granting admin privileges
 			FirebaseOptions options = new FirebaseOptions.Builder()
@@ -75,7 +74,17 @@ public class MainApp extends Application {
 			}
 
 			@Override
-			public void onChildRemoved(DataSnapshot dataSnapshot) {}
+			public void onChildRemoved(DataSnapshot dataSnapshot) {
+				String key = dataSnapshot.getKey();
+				synchronized(SaleData) {
+					for(Iterator<SaleItem> it = SaleData.iterator(); it.hasNext();) {
+						String value = it.next().getKey();
+						if(value.equals(key)) {
+							it.remove();
+						}
+					}
+				}
+			}
 
 			@Override
 			public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
@@ -83,7 +92,6 @@ public class MainApp extends Application {
 			@Override
 			public void onCancelled(DatabaseError databaseError) {}
 		});
-
 	}
 
 	public ObservableList<SaleItem> getSaleData(){
@@ -101,14 +109,15 @@ public class MainApp extends Application {
 	public void initRootLayout(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/RootLayout.fxml"));
+			loader.setLocation(getClass().getResource("/src/List/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
+			
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
 			
 			RootOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
 			primaryStage.show();
 		}catch(IOException e){
 			e.printStackTrace();
@@ -117,7 +126,7 @@ public class MainApp extends Application {
 	public void showListOverview(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/ListOverview.fxml"));
+			loader.setLocation(MainApp.class.getResource("/src/List/view/ListOverview.fxml"));
 			AnchorPane ListOverview = (AnchorPane)loader.load();
 
 			rootLayout.setCenter(ListOverview);
@@ -131,7 +140,7 @@ public class MainApp extends Application {
 	public boolean showSaleEditDialog(SaleItem sale){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/SaleEditDialog.fxml"));
+			loader.setLocation(MainApp.class.getResource("/src/List/view/SaleEditDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -155,7 +164,7 @@ public class MainApp extends Application {
 	public void showSaleNewDialog(){
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/SaleEditDialog.fxml"));
+			loader.setLocation(MainApp.class.getResource("/src/List/view/SaleEditDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -176,7 +185,7 @@ public class MainApp extends Application {
 	public void showFontDlg() {
 		try{
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("/List/view/FontDlg.fxml"));
+			loader.setLocation(MainApp.class.getResource("/src/List/view/FontDlg.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 			Stage dialogStage = new Stage();
 			dialogStage.initModality(Modality.WINDOW_MODAL);
